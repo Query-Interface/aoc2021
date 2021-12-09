@@ -27,7 +27,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.queryinterface.aoc.Appb</mainClass>
+                            <mainClass>com.queryinterface.aoc.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
