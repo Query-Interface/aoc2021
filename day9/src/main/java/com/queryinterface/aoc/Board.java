@@ -1,13 +1,27 @@
 package com.queryinterface.aoc;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.ArrayList;
 
 public class Board {
     private int[][] matrix;
     
     final record Point(int x, int y, int value) {};
-    final record PointAdv(int x, int y, int value, Point up, Point down, Point left, Point right) {}
+    final record PointAdv(int x, int y, int value, Point up, Point down, Point left, Point right) {
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            PointAdv point = (PointAdv) o;
+            return x == point.x && y == point.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+    }
     static final Point NONE = new Point(-1, -1, 10);
 
     public static Board of(List<String> lines) {
@@ -47,7 +61,11 @@ public class Board {
         return points;
     }
 
-    public PointAdv getPoint(int x, int y) {
+    public PointAdv getPoint(final Point p) {
+        return getPoint(p.x(), p.y());
+    }
+
+    public PointAdv getPoint(final int x, final int y) {
         Point left=NONE, up=NONE, down=NONE, right=NONE;
         if (x == 0) {
             left = NONE;
